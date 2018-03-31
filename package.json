@@ -1,0 +1,24 @@
+{
+  "name": "restaurante",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "*",
+    "morgan": "*",
+    "cpf_cnpj": "*"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  }
+}
