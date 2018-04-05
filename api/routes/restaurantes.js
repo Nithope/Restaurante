@@ -3,17 +3,17 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const cpf_cnpj = require("cpf_cnpj").CNPJ;
-const checkAuth = require("../middleware/check-auth");
 
+const checkAuth = require("../middleware/check-auth");
 const Restaurante = require('../models/restaurante');
 
-router.post('/register', checkAuth, (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
     Restaurante.find({ cnpj: req.body.cnpj })
         .exec()
         .then(restaurante => {
             if (restaurante.length >= 1) {
                 return res.status(409).json({
-                    message: 'CNPJ already registed'
+                    message: 'CNPJ already registered'
                 });
             } 
             else {
@@ -55,7 +55,7 @@ router.put('/', checkAuth, (req, res, next) => {
         .then(restaurante => {
             if (restaurante.length >= 1) {
                 return res.status(409).json({
-                    message: 'CNPJ already registed'
+                    message: 'CNPJ already registered ',
                 });
             } 
             else {
@@ -110,18 +110,18 @@ router.delete('/:restauranteId', checkAuth, (req, res, next) =>{
 
 router.get('/', checkAuth, (req, res, next) =>{
 
-    var page = parseInt(req.query.page) || 0;
+    var page = parseInt(req.query.page) || 1;
     var limit = parseInt(req.query.limit) || 20; 
     var orderField = req.query.orderField || "name";
     var orderBy = req.query.orderBy || "desc";
     
       Restaurante.find()
       .limit(limit)
-      .skip(limit*page)
+      .skip((page - 1)* limit)
       .sort([[orderField,orderBy]])
       .exec()
       .then(doc => {
-        if (doc) {
+        if (doc.length >= 1) {
           res.status(200).json({
               restaurantes: doc
           });
