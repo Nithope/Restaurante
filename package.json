@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./test/test-app.js --timeout 15000",
     "start": "nodemon server.js"
   },
   "author": "",
@@ -12,13 +12,16 @@
   "dependencies": {
     "bcrypt": "*",
     "body-parser": "*",
+    "cpf_cnpj": "*",
     "express": "*",
+    "faker": "^4.1.0",
     "jsonwebtoken": "*",
     "mongoose": "*",
-    "morgan": "*",
-    "cpf_cnpj": "*"
+    "morgan": "*"
   },
   "devDependencies": {
-    "nodemon": "*"
+    "mocha": "^5.0.5",
+    "nodemon": "*",
+    "supertest": "^3.0.0"
   }
 }
